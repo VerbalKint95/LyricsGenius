@@ -20,8 +20,12 @@ class Song(BaseEntity):
         self.artist = body["primary_artist"]["name"]
         self.lyrics = lyrics if lyrics else ""
         self.primary_artist = Artist(client, body["primary_artist"])
+        self.primary_artists = [Artist(client, artist_data) for artist_data in body["primary_artists"]]
         self.stats = Stats(body["stats"])
         self.album = Album(client, body["album"], []) if body.get("album") else None
+        self.writers = [Artist(client, writer_data) for writer_data in body["writer_artists"]]
+        self.producers = [Artist(client, producer_data) for producer_data in body["producer_artists"]]
+
 
         self.annotation_count = body["annotation_count"]
         self.api_path = body["api_path"]
