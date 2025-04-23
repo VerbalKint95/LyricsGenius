@@ -25,6 +25,7 @@ class Song(BaseEntity):
         self.album = Album(client, body["album"], []) if body.get("album") else None
         self.writers = [Artist(client, writer_data) for writer_data in body["writer_artists"]]
         self.producers = [Artist(client, producer_data) for producer_data in body["producer_artists"]]
+        self.featuring = [Artist(client, featuring_data) for featuring_data in body["featured_artists"]]
 
 
         self.annotation_count = body["annotation_count"]
